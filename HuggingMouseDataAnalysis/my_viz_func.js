@@ -10,6 +10,7 @@ import {
     scaleOrdinal,
     selectAll,
     schemeCategory10,
+    scaleLinear
   } from "https://cdn.skypack.dev/d3@7.8.5";
   
   import {
@@ -164,23 +165,28 @@ import {
   
     async function init() {
       const datafile = await getData();
-      console.log('tere', datafile)
+      console.log('tere', datafile[1])
       console.log('boom!');
       xGrid = [];
       scatter = [];
       yLine = [];
         
       let cnt = 0;
+
+      let myScale=scaleLinear().domain([-2,2]).range([-5,5])
         
       for (let z = -j; z < j; z++) {
         for (let x = -j; x < j; x++) {
+          console.log('boom', x,z)
           xGrid.push({ x: x, y: 1, z: z});
+          console.log(cnt);
           scatter.push({
-            x: parseFloat(datafile[cnt]["x"]),
-            y: parseFloat(datafile[cnt]["y"]),
-            z: parseFloat(datafile[cnt]["z"]),
+            x: myScale(parseFloat(datafile[cnt]["x"])),
+            y: myScale(parseFloat(datafile[cnt]["y"])),
+            z: myScale(parseFloat(datafile[cnt]["z"])),
             id: datafile[cnt]["id"],
           });
+          cnt++
         }
       }
   
