@@ -19,6 +19,8 @@ import {
   } from "https://cdn.skypack.dev/d3-3d@1.0.0";
   
   document.addEventListener("DOMContentLoaded", () => {
+
+
       const origin = { x: 480, y: 250 };
       const j = 10;
       const scale = 20;
@@ -146,8 +148,23 @@ import {
     function posPointY(d) {
       return d.projected.y;
     }
+
+    async function getData() {
+        try {
+            const response = await fetch('my_data.json');
+            const data = await response.json();
+            console.log('Data:', data);
+            return data;
+        } catch (error) {
+            console.error('Error:', error);
+            throw error;
+        }
+    }
+    
   
-    function init() {
+    async function init() {
+      const datafile = await getData();
+      console.log('tere', datafile)
       console.log('boom!');
       xGrid = [];
       scatter = [];
@@ -159,10 +176,10 @@ import {
         for (let x = -j; x < j; x++) {
           xGrid.push({ x: x, y: 1, z: z});
           scatter.push({
-            x: x,
-            y: randomUniform(0, -10)(),
-            z: z,
-            id: "point-" + cnt++,
+            x: parseFloat(datafile[cnt]["x"]),
+            y: parseFloat(datafile[cnt]["y"]),
+            z: parseFloat(datafile[cnt]["z"]),
+            id: datafile[cnt]["id"],
           });
         }
       }
