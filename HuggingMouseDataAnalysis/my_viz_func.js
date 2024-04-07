@@ -174,20 +174,30 @@ import {
       let cnt = 0;
 
       let myScale=scaleLinear().domain([-2,2]).range([-5,5])
+      let myScale2=scaleLinear().domain([-2,2]).range([-19,5])
         
       for (let z = -j; z < j; z++) {
         for (let x = -j; x < j; x++) {
           console.log('boom', x,z)
           xGrid.push({ x: x, y: 1, z: z});
-          console.log(cnt);
-          scatter.push({
-            x: myScale(parseFloat(datafile[cnt]["x"])),
-            y: myScale(parseFloat(datafile[cnt]["y"])),
-            z: myScale(parseFloat(datafile[cnt]["z"])),
-            id: datafile[cnt]["id"],
-          });
-          cnt++
+          //console.log(cnt);
+          //scatter.push({
+            //x: myScale(parseFloat(datafile[cnt]["x"])),
+            //y: myScale2(parseFloat(datafile[cnt]["y"])),
+            //z: myScale(parseFloat(datafile[cnt]["z"])),
+            //id: datafile[cnt]["id"],
+          //});
+          //cnt++
         }
+      }
+      
+      for (let c=0; c<300; c++) {
+        scatter.push({
+          x: myScale(parseFloat(datafile[c]["x"])),
+          y: myScale2(parseFloat(datafile[c]["y"])),
+          z: myScale(parseFloat(datafile[c]["z"])),
+          id: datafile[c]["id"],
+        });
       }
   
       range(-1, 11, 1).forEach((d) => {
