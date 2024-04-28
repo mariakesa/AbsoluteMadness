@@ -1,2 +1,4 @@
 *.npy
 *.json
+*.env
+__pycache__/
