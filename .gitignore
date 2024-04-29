@@ -1,4 +1,4 @@
 *.npy
 *.json
 *.env
-__pycache__/
+CrazySimulations/__pycache__/
