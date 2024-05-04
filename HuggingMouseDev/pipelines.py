@@ -1,42 +1,46 @@
 from typing import List
 from typing import List, Type
+import os
+import dotenv
+
+dotenv.load_dotenv()
 
 
 class Task:
+    def __init__(self):
+        self.allen_cache_path = os.environ.get('HGMS_ALLEN_CACHE_PATH')
+
     def __call__(self, input_text: str) -> str:
-        raise NotImplementedError
+        print('boom!')
+        johnny_cash = self.allen_cache_path
 
+        def my_func():
+            print(johnny_cash)
 
-class Task1(Task):
-    def __call__(self, input_text: str) -> str:
-        # Task 1 logic
-        return input_text
-
-
-class Task2(Task):
-    def __call__(self, input_text: str) -> str:
-        # Task 2 logic
-        return input_text
+        my_func()
+        # raise NotImplementedError
 
 
 class Pipeline:
-    def __init__(self, tasks: List[Type[Task]]):
-        self.tasks = tasks
+    def __init__(self, task: List[Type[Task]]):
+        self.task = task
 
     def __call__(self, input_text: str) -> str:
         output = input_text
-        for task in self.tasks:
-            output = task()(output)
+        output = self.task()(output)
         return output
 
 
-def pipeline(task_names: List[str]) -> Pipeline:
+def pipeline(task_name: str) -> Pipeline:
     task_mapping = {
-        "task1": Task1,
-        "task2": Task2,
+        "neuron-prediction": Task,
     }
-    tasks = [task_mapping[task_name] for task_name in task_names]
-    return Pipeline(tasks)
+    task = task_mapping[task_name]
+    return Pipeline(task)
+
+
+pipeline = pipeline("neuron-prediction")
+pipeline("input text")
 
 
 class Pipeline:
