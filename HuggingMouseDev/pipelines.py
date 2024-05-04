@@ -3,6 +3,26 @@ from typing import List, Type
 import os
 import dotenv
 
+import types
+
+
+class Kodu:
+    def __init__(self):
+        self.myfunc = None
+        self.foto = "klõps"
+
+    def add_function(self, f):
+        self.myfunc = types.MethodType(f, self)
+
+
+def a(self):
+    print(self.foto)
+
+
+k = Kodu()
+k.add_function(a)
+k.myfunc()
+
 dotenv.load_dotenv()
 
 
@@ -10,24 +30,18 @@ class Task:
     def __init__(self):
         self.allen_cache_path = os.environ.get('HGMS_ALLEN_CACHE_PATH')
 
-    def __call__(self, input_text: str) -> str:
+    def __call__(self, input_text: str, my_func) -> str:
         print('boom!')
         johnny_cash = self.allen_cache_path
-
-        def my_func():
-            print(johnny_cash)
-
-        my_func()
-        # raise NotImplementedError
 
 
 class Pipeline:
     def __init__(self, task: List[Type[Task]]):
         self.task = task
 
-    def __call__(self, input_text: str) -> str:
+    def __call__(self, input_text: str, my_func) -> str:
         output = input_text
-        output = self.task()(output)
+        output = self.task()(output, my_func)
         return output
 
 
@@ -40,7 +54,7 @@ def pipeline(task_name: str) -> Pipeline:
 
 
 pipeline = pipeline("neuron-prediction")
-pipeline("input text")
+pipeline("input text", model, regression_model, mixin)
 
 
 class Pipeline:
