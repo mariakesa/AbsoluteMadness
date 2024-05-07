@@ -8,10 +8,10 @@ class Pipeline:
 
 
 class NeuronPredictionPipeline(Pipeline):
-    def __init__(self, model, regression_model, analysis_function):
-        self.model = model
-        self.regression_model = regression_model
-        self.analysis_function = analysis_function
+    def __init__(self, **kwargs):
+        self.model = kwargs['model']
+        self.regression_model = kwargs['regression_model']
+        self.analysis_function = kwargs['analysis_function']
 
     def __call__(self, experiment_id) -> str:
         output = experiment_id
