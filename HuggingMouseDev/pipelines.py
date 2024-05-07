@@ -15,8 +15,8 @@ class Kodu:
         self.myfunc = types.MethodType(f, self)
 
 
-def a(self):
-    print(self.foto)
+def a(object):
+    print(object.foto)
 
 
 k = Kodu()
