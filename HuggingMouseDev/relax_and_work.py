@@ -16,7 +16,15 @@ class NeuronPredictionPipeline(Pipeline):
     def __call__(self, experiment_id) -> str:
         output = experiment_id
         print(output)
-        return output
+        return self
+
+    def plot(self, args=None):
+        print('plotting')
+        return self
+
+    def filter_data(self, args=None):
+        print('filtering')
+        return self
 
 
 def pipeline(task_name: str, **kwargs) -> Pipeline:
@@ -30,4 +38,4 @@ def pipeline(task_name: str, **kwargs) -> Pipeline:
 pipe = pipeline("neuron-prediction", model='car',
                 regression_model='house', analysis_function='tree')
 
-pipe(1234)
+pipe(1234).filter_data('my_filter').plot('my_func')
