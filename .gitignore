@@ -2,3 +2,5 @@
 *.json
 *.env
 CrazySimulations/__pycache__/
+CEBRAPlay/data/
+waveform_data.txt
